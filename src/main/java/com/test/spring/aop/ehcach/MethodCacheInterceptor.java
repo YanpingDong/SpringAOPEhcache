@@ -32,7 +32,7 @@ public class MethodCacheInterceptor implements MethodInterceptor,
     }   
   
     /**  
-     * 拦截VisturalDatabase的方法，并查找该结果是否存在，如果存在就返回cache中的值，  
+     * 拦截VisturalDatabase中findXX和exist的方法，并查找该结果是否存在，如果存在就返回cache中的值，  
      * 否则，返回数据库查询结果，并将查询结果放入cache  
      */  
     public Object invoke(MethodInvocation invocation) throws Throwable {   
