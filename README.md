@@ -8,8 +8,12 @@ integrate ehcach and spring useing spring aop tech
 
 ==============================================
 com.test.spring.aspectj.aop
-this package show how to use Aspectj 
+this package show how to use Aspectj .JDK must be upper JDK 5.0
 
 ==============================================
 com.test.spring.aspectj.schema.aop
 use xml file to define aspect pointcut 
+
+==============================================
+com.test.ehcache.listener
+use spring bean in ehcache listener

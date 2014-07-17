@@ -10,15 +10,8 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd
 http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
-  <bean id="waiter" class="com.test.spring.aspectj.schema.aop.NaiveWaiter"/>
-  <bean id="adviceMethods" class="com.test.spring.aspectj.schema.aop.PreGreetingAspect"/>
+  <context:load-time-weaver/>
   
-  <aop:config proxy-target-class="true">
-    <aop:aspect ref="adviceMethods">
-      <aop:before method="beforeGreeting"
-      pointcut="target(com.test.spring.aspectj.schema.aop.NaiveWaiter) and execution(* greetTo(..))"/>
-    </aop:aspect>
-  </aop:config>
-  
+  <bean class="com.test.spring.ltw.aspectj.aop.NaiveWaiter"/>
      
 </beans>

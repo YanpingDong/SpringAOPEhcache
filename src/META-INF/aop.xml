@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<aspectj>
+  <aspects>
+     <!-- 使用节面类 -->
+     <aspect name="com.test.spring.ltw.aspectj.aop.PreGreetingAspect"/>
+  </aspects>
+  <!-- 要织入切面的候选类 -->
+  <weaver options="-showWeaveInfo
+  -XmessageHandlerClass:org.springframework.aop.aspectj.AspectJWeaverMessageHandler">
+     <include within="com.test.spring.ltw.aspectj.aop.*"/>
+  </weaver>
+</aspectj>
