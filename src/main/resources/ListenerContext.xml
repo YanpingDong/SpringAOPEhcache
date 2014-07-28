@@ -9,9 +9,10 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd ">
       
     <context:property-placeholder location="classpath*:AppContext.properties" ignore-unresolvable="true"/>
     
-    <!-- Required to located at the front. because ehcache.xml refer to  
+    <!-- Required to located at the front. because expireEhcache.xml refer to  
     SimpleCacheEventListenerFactory that included springContextHelper and will 
-    invoke static function of getBean of SpringContextHelper-->
+    invoke static function of getBean of SpringContextHelper so to avoid null point
+    error must to initial springContextHelper at first!!!-->
     <bean id="springContextHelper" class="com.test.ehcache.listener.SpringContextHelper"/>  
     
     <!-- 引用ehCache的配置 -->   
@@ -30,12 +31,12 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd ">
           <value>DEFAULT_CACHE_I</value>   
       </property>  
       </bean>  
-    
-    
-      
+       
     <bean id="simpleEhCacheOperation" class="com.test.ehcache.listener.SimpleEhCacheOperation">
       <constructor-arg name="cache" ref="ehCache"/>
     </bean>
+    
+    <bean id="doingSomeOperation" class="com.test.ehcache.listener.DoingSomeOperation"/>
     
     <bean id="simpleCacheEventListener" class="com.test.ehcache.listener.SimpleCacheEventListener"/>
 </beans>

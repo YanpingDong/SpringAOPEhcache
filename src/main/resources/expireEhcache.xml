@@ -20,6 +20,7 @@
         overflowToDisk="false"  
         memoryStoreEvictionPolicy="FIFO"
         >
+     
         <cacheEventListenerFactory   class="com.test.ehcache.listener.SimpleCacheEventListenerFactory"
           properties="bean=simpleCacheEventListener" />
         </cache>  

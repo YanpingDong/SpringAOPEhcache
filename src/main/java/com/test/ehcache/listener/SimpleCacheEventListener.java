@@ -9,6 +9,10 @@ public class SimpleCacheEventListener implements CacheEventListener {
 
 	public static final CacheEventListener INSTANCE = new SimpleCacheEventListener();
 	
+	private DoingSomeOperation doingSomeOperation = 
+			(DoingSomeOperation) SpringContextHelper.getBean("doingSomeOperation");
+	
+	
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -24,6 +28,7 @@ public class SimpleCacheEventListener implements CacheEventListener {
 	public void notifyElementExpired(Ehcache arg0, Element arg1) {
 		System.out.println("notify element expired: key is " + arg1.getKey() + " | " +arg1.toString()+ " | "
 				+ arg1.getCreationTime() + " | " + arg1.getExpirationTime());
+		doingSomeOperation.operateOne();
 	}
 
 	@Override

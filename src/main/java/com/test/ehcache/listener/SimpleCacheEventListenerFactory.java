@@ -9,6 +9,7 @@ public class SimpleCacheEventListenerFactory extends CacheEventListenerFactory {
 
 	@Override
 	public CacheEventListener createCacheEventListener(Properties properties) {
+		CacheEventListener listener = null;
 		String beanName = properties.getProperty("bean");
 		System.out.println("creat listener " + beanName);
 		if( beanName == null )
@@ -17,7 +18,8 @@ public class SimpleCacheEventListenerFactory extends CacheEventListenerFactory {
 			throw new IllegalArgumentException("don't find bean name");
 		}
 		
-		if(SpringContextHelper.getBean(beanName) == null)
+		listener = (CacheEventListener) SpringContextHelper.getBean(beanName);
+		if( listener == null )
 		{
 			System.out.println("can't get " + beanName +", it's null");
 		}
@@ -26,7 +28,7 @@ public class SimpleCacheEventListenerFactory extends CacheEventListenerFactory {
 			System.out.println("create listener " + SpringContextHelper.getBean(beanName).toString());
 		}
 		
-		return (SimpleCacheEventListener) SpringContextHelper.getBean(beanName);
+		return (CacheEventListener) listener;
 		//return SimpleCacheEventListener.INSTANCE;
 		
 	}
