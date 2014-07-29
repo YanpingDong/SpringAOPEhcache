@@ -12,8 +12,16 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
   
   <aop:aspectj-autoproxy proxy-target-class="true"/>      
   
-  <bean id="waiter" class="com.test.spring.aspectj.aop.NaiveWaiter"/>
+  <!-- auto configure AutowiredAnnotationBeanPostProcessor、CommonAnnotationBeanPostProcessor、
+       PersistenceAnnotationBeanPostProcessor and RequiredAnnotationBeanPostProcess
+       If don't configure  AutowiredAnnotationBeanPostProcessor and RequiredAnnotationBeanPostProcess
+       the @Autowire and @Require don't to take effect  -->
+  <context:annotation-config/>
   
-  <bean class="com.test.spring.aspectj.aop.PreGreetingAspect"/>
+  <bean id="waiter" class="com.test.spring.aspect.aop.ioc.NaiveWaiter"/>
+  
+  <bean id="beInjectedObject2PreGreetingAspect" class="com.test.spring.aspect.aop.ioc.BeInjectedObject2PreGreetingAspect"/>
+  
+  <bean class="com.test.spring.aspect.aop.ioc.PreGreetingAspect"/>
    
 </beans>

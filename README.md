@@ -21,3 +21,10 @@ Note: can't run. I don't know why. so don't use this sample
 ==============================================
 com.test.ehcache.listener
 use spring bean in ehcache listener
+
+==============================================
+com.test.spring.aspect.aop.ioc
+1.Sometime want to refer other object to extend the advisor.
+2.In this sample. PreGreetingAspect advisor refer BeInjectedObject2PreGreetingAspect
+to extend greetTo function of NaiveWaiter. 
+3.utilize spring ioc for PreGreetingAspect to auto inject BeInjectedObject2PreGreetingAspect
