@@ -23,6 +23,10 @@ com.test.ehcache.listener
 use spring bean in ehcache listener
 
 ==============================================
+com.test.ehcache.object
+demostrate how to stored non primitive type in ehcache and some notes
+
+==============================================
 com.test.spring.aspect.aop.ioc
 1.Sometime want to refer other object to extend the advisor.
 2.In this sample. PreGreetingAspect advisor refer BeInjectedObject2PreGreetingAspect
