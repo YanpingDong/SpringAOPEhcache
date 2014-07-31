@@ -2,6 +2,9 @@ package com.test.ehcache.aspectj.dynamic.create.cahce;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
+import net.sf.ehcache.config.CacheConfiguration;
+import net.sf.ehcache.config.CacheConfiguration.CacheEventListenerFactoryConfiguration;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -16,10 +19,21 @@ public class PreDBOCacheAspect {
 	{
 		/*
 		 * cann't know how many cache will be create, so name is a issue. 
-		 * there use object hoashCode as name.
+		 * the current method use object hoashCode as name.
 		 */
-		cache = new Cache(String.valueOf(this.hashCode()), maxElementsInMemory,
-				overflowToDisk, eternal, timeToLiveSeconds, timeToIdleSeconds);
+		//register listener
+		CacheEventListenerFactoryConfiguration factory = new CacheEventListenerFactoryConfiguration();
+		factory.className("com.test.ehcache.aspectj.dynamic.create.cahce.SimpleCacheEventListenerFactory");
+		
+		CacheConfiguration cacheConfiguration = new CacheConfiguration(String.valueOf(this.hashCode()), maxElementsInMemory)
+        .overflowToDisk(overflowToDisk)
+        .eternal(eternal)
+        .timeToLiveSeconds(1)
+        .timeToIdleSeconds(1)
+        .cacheEventListenerFactory(factory);
+
+		cache = new Cache(cacheConfiguration, null, null);
+
 		CacheManager.create().addCache(cache);
 	}
 	
@@ -27,5 +41,20 @@ public class PreDBOCacheAspect {
 	public void beforeExist()
 	{
 		System.out.println("this object use " + cache.getName()  + " cache");
+		
+		//put element to trigger event of putting in listener
+		Element element = new Element("key", "element");
+		cache.put(element);
+		
+		//wait for element expire and then invoke evictExpiredElements to 
+		//trigger event of Element Expired
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cache.evictExpiredElements();
+		
 	}
 }
