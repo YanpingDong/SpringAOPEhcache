@@ -9,7 +9,7 @@ public class TestAspectjClient {
 	private static ApplicationContext context;
 	
 	public static void main(String[] args) {
-		NaiveWaiter target = new NaiveWaiter();
+		NaiveWaiter target = new NaiveWaiter(" test");
 		
 		AspectJProxyFactory factory = new AspectJProxyFactory();
 	    factory.setTarget(target);

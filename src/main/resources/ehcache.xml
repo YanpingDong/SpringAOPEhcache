@@ -17,6 +17,6 @@
         eternal="false"  
         timeToIdleSeconds="300000"  
         timeToLiveSeconds="600000"  
-        overflowToDisk="true"  
+        overflowToDisk="false"  
         />  
 </ehcache>

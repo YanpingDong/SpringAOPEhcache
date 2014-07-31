@@ -12,7 +12,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
   
   <aop:aspectj-autoproxy proxy-target-class="true"/>      
   
-  <bean id="waiter" class="com.test.spring.aspectj.aop.NaiveWaiter"/>
+  <bean id="waiter" class="com.test.spring.aspectj.aop.NaiveWaiter">
+  <constructor-arg name="name" value=" test"/>
+  </bean>
   
   <bean class="com.test.spring.aspectj.aop.PreGreetingAspect"/>
    
