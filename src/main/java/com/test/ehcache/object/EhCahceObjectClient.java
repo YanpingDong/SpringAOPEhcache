@@ -23,8 +23,9 @@ public class EhCahceObjectClient
          Element element = new Element("infoObject", infoObject); 
  		 cache.put(element);
  		
-          ((InfoObject)cache.get("infoObject").getObjectValue()).print();
-          System.out.println(cache.get("infoObject").getValue().toString());
-          logger.debug("end");
+         ((InfoObject)cache.get("infoObject").getObjectValue()).print();
+         System.out.println(cache.get("infoObject").getValue().toString());
+         logger.debug("end");
+        
     }
 }

@@ -32,6 +32,6 @@ public class InfoObject implements Serializable{
 	@Override
 	public String toString()
 	{
-		return this.name + " age is " + age;
+		return String.valueOf(this.hashCode());
 	}
 }
