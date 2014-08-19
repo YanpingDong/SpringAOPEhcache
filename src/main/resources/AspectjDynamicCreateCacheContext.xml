@@ -21,7 +21,6 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
   
   <!-- Because each object have own cache, so must set scope to prototype. if not AOP will use
   one object to extend proxy object -->
-  <!--int maxElementsInMemory, boolean overflowToDisk, boolean eternal, long timeToLiveSeconds, long timeToIdleSeconds  -->
   <bean class="com.test.ehcache.aspectj.dynamic.create.cahce.PreDBOCacheAspect" scope="prototype">
   	<constructor-arg name="maxElementsInMemory" value="10"/>
   	<constructor-arg name="overflowToDisk" value="false"/>

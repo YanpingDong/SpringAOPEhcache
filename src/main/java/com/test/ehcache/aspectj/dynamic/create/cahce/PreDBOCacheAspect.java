@@ -21,11 +21,12 @@ public class PreDBOCacheAspect {
 		 * cann't know how many cache will be create, so name is a issue. 
 		 * the current method use object hoashCode as name.
 		 */
+		
 		//register listener
 		CacheEventListenerFactoryConfiguration factory = new CacheEventListenerFactoryConfiguration();
 		factory.className("com.test.ehcache.aspectj.dynamic.create.cahce.SimpleCacheEventListenerFactory");
 		
-		CacheConfiguration cacheConfiguration = new CacheConfiguration(String.valueOf(this.hashCode()), maxElementsInMemory)
+		 CacheConfiguration cacheConfiguration = new CacheConfiguration(String.valueOf(this.hashCode()), maxElementsInMemory)
         .overflowToDisk(overflowToDisk)
         .eternal(eternal)
         .timeToLiveSeconds(1)
@@ -51,10 +52,9 @@ public class PreDBOCacheAspect {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		cache.evictExpiredElements();
 		
+		cache.evictExpiredElements();
 	}
 }

@@ -16,6 +16,9 @@ public class TestAspectjDynamicCreateCacheClient {
         VirtualDatabase virtualDatabase11 = context.getBean("virtualDatabase1", VirtualDatabase.class);
         VirtualDatabase virtualDatabase22 = context.getBean("virtualDatabase2", VirtualDatabase.class);
 	
+        /*
+         * test function by invoking exist function
+         */
         virtualDatabase11.exist();
         virtualDatabase11.exist();
         

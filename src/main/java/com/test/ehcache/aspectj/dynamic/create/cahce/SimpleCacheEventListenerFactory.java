@@ -11,7 +11,6 @@ public class SimpleCacheEventListenerFactory extends CacheEventListenerFactory {
 	public CacheEventListener createCacheEventListener(Properties properties) {
 	
 		return (CacheEventListener) SimpleCacheEventListener.INSTANCE;
-		//return SimpleCacheEventListener.INSTANCE;
 		
 	}
 

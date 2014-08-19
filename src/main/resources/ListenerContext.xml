@@ -12,11 +12,14 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd ">
     <!-- Required to located at the front. because expireEhcache.xml refer to  
     SimpleCacheEventListenerFactory that included springContextHelper and will 
     invoke static function of getBean of SpringContextHelper so to avoid null point
-    error must to initial springContextHelper at first!!!-->
-    <bean id="springContextHelper" class="com.test.ehcache.listener.SpringContextHelper"/>  
+    error must to initial springContextHelper at first!!! or add depend-on at defaultCacheManager 
+    force cahce initial after springContextHelper object
+    NOTE :depend-on property should just be necessary for other kinds of dependencies like statics (*ugh*) or database preparation on 
+          startup. Because dependencies are normally expressed through bean properties or constructor arguments. -->
+    <!-- <bean id="springContextHelper" class="com.test.ehcache.listener.SpringContextHelper"/>   -->
     
     <!-- 引用ehCache的配置 -->   
-    <bean id="defaultCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">   
+    <bean id="defaultCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" depends-on="springContextHelper">   
       <property name="configLocation">   
         <value>expireEhcache.xml</value>   
       </property>   
@@ -39,4 +42,6 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd ">
     <bean id="doingSomeOperation" class="com.test.ehcache.listener.DoingSomeOperation"/>
     
     <bean id="simpleCacheEventListener" class="com.test.ehcache.listener.SimpleCacheEventListener"/>
+    
+    <bean id="springContextHelper" class="com.test.ehcache.listener.SpringContextHelper"/>  
 </beans>
