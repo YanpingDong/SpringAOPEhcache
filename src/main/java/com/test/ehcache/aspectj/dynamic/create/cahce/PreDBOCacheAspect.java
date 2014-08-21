@@ -44,17 +44,19 @@ public class PreDBOCacheAspect {
 		System.out.println("this object use " + cache.getName()  + " cache");
 		
 		//put element to trigger event of putting in listener
-		Element element = new Element("key", "element");
+		String keyName = "key";
+		
+		Element element = new Element(keyName, "element");
 		cache.put(element);
 		
 		//wait for element expire and then invoke evictExpiredElements to 
 		//trigger event of Element Expired
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
-		cache.evictExpiredElements();
+		//cache.evictExpiredElements();
 	}
 }

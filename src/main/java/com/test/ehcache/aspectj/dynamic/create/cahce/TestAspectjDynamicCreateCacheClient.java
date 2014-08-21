@@ -1,6 +1,7 @@
 package com.test.ehcache.aspectj.dynamic.create.cahce;
 
 import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,16 +20,24 @@ public class TestAspectjDynamicCreateCacheClient {
         /*
          * test function by invoking exist function
          */
-        virtualDatabase11.exist();
-        virtualDatabase11.exist();
-        
+        virtualDatabase11.exist(); 
         virtualDatabase22.exist();
-        virtualDatabase22.exist();
-       String[] caches = CacheManager.create().getCacheNames();
+    
+       String[] caches = CacheManager.getInstance().getCacheNames();
        int length = caches.length;
        System.out.println("================");
        for(int i = 0; i < length; i++)
+       {
     	   System.out.println(caches[i]);
+    	   Element element = CacheManager.getInstance().getEhcache(caches[i]).get("key");
+    	   
+    	   if(null != element)
+    	       System.out.println(element.getObjectKey());
+    	   else
+    		   System.out.println("The element already has been clear");
+           
+    	   CacheManager.getInstance().getEhcache(caches[i]).evictExpiredElements();
+       }
 	}
 
 }
