@@ -4,8 +4,12 @@ import org.springframework.cache.annotation.Cacheable;
 
 public class SimpleBookRepository implements BookRepository {
 
+	/*
+	 * Question:
+	 * If configure cache first, How to dynamic create a cache? 
+	 */
     @Override
-    @Cacheable("books")
+    @Cacheable("books")//configure cache first
     public Book getByIsbn(String isbn) {
         simulateSlowService();
         return new Book(isbn, "Some book");
