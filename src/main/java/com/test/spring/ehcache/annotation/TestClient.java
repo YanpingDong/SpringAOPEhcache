@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -73,8 +74,10 @@ public class TestClient {
          * by Spring AOP mechanism so there use a proxy object to
          * invoke SimpleBookRepository though spring Autowired method to inject
          * a SimpleBookRepository object to SimpleBookRepositoryProxy
+         * OR convert bean to Interface
          */
-        //SimpleBookRepository sbrp1 = context.getBean(SimpleBookRepository.class);
+        BookRepository sbrp1 = (BookRepository)context.getBean("simpleBookRepository");
+        log.debug(sbrp1.getByIsbn("isbn").toString());
         SimpleBookRepositoryProxy sbrp = context.getBean(SimpleBookRepositoryProxy.class);
         sbrp.invoke();
     }
