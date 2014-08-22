@@ -27,7 +27,7 @@ public class SimpleCacheEventListener implements CacheEventListener {
 	@Override
 	public void notifyElementExpired(Ehcache arg0, Element arg1) {
 		System.out.println("notify element expired: key is " + arg1.getKey() + " | " +arg1.toString()+ " | "
-				+ arg1.getCreationTime() + " | " + arg1.getExpirationTime());
+				+ arg1.getCreationTime() + " | " + arg1.getExpirationTime() + " in " + arg0.getName());
 		doingSomeOperation.operateOne();
 	}
 

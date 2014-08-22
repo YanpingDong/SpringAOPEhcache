@@ -26,7 +26,7 @@ public class PreDBOCacheAspect {
 		CacheEventListenerFactoryConfiguration factory = new CacheEventListenerFactoryConfiguration();
 		factory.className("com.test.ehcache.aspectj.dynamic.create.cahce.SimpleCacheEventListenerFactory");
 		
-		 CacheConfiguration cacheConfiguration = new CacheConfiguration(String.valueOf(this.hashCode()), maxElementsInMemory)
+		CacheConfiguration cacheConfiguration = new CacheConfiguration(String.valueOf(this.hashCode()), maxElementsInMemory)
         .overflowToDisk(overflowToDisk)
         .eternal(eternal)
         .timeToLiveSeconds(1)

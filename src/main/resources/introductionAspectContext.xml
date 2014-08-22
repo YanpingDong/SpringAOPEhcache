@@ -14,6 +14,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
   
   <bean id="naiveWaiter" class="com.test.spring.aspectj.introduction.aop.NaiveWaiter" />
 
-  <bean class="com.test.spring.aspectj.introduction.aop.IntroductionAspect"/>
+  <bean class="com.test.spring.aspectj.introduction.aop.IntroductionAspect" scope="singleton">
+      <constructor-arg name="tmpStr" value="Smile to the guest xx:"/>
+  </bean>
   	
 </beans>

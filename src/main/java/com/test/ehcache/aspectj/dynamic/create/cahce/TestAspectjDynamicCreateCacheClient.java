@@ -29,10 +29,10 @@ public class TestAspectjDynamicCreateCacheClient {
        for(int i = 0; i < length; i++)
        {
     	   System.out.println(caches[i]);
+    	  
     	   Element element = CacheManager.getInstance().getEhcache(caches[i]).get("key");
-    	   
     	   if(null != element)
-    	       System.out.println(element.getObjectKey());
+    	       System.out.println("get element key in cache : " + element.getObjectKey());
     	   else
     		   System.out.println("The element already has been clear");
            

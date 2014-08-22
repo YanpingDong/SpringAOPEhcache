@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Hello world!
  *
  */
-public class App 
+public class TestClient 
 {
 	private static ApplicationContext context;
 	

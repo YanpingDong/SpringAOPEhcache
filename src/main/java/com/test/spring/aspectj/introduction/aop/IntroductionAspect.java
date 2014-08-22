@@ -7,6 +7,13 @@ import org.aspectj.lang.annotation.DeclareParents;
 public class IntroductionAspect implements Seller{
 	private String smile = "Smile to the guest ";
 	
+	public IntroductionAspect(){}
+	
+	public IntroductionAspect(String tmpStr)
+	{
+		smile=tmpStr;
+	}
+	
 	@DeclareParents(value="com.test.spring.aspectj.introduction.aop.NaiveWaiter",
 			defaultImpl=com.test.spring.aspectj.introduction.aop.IntroductionAspect.class)
 	private Seller seller;
