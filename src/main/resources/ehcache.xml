@@ -19,4 +19,12 @@
         timeToLiveSeconds="600000"  
         overflowToDisk="false"  
         />  
+        
+  <cache name="books"  
+        maxElementsInMemory="10000"  
+        eternal="false"  
+        timeToIdleSeconds="300000"  
+        timeToLiveSeconds="600000"  
+        overflowToDisk="false"  
+        /> 
 </ehcache>

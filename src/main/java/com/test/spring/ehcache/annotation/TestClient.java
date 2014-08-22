@@ -4,13 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /*
  * Run this sample have to change the POM.xml
@@ -22,6 +23,8 @@ public class TestClient {
 
     private static final Logger log = LoggerFactory.getLogger(TestClient.class);
 
+    private static ApplicationContext context;
+    
     @Configuration
     static class Runner implements CommandLineRunner {
         @Autowired
@@ -46,10 +49,33 @@ public class TestClient {
 
     @Bean
     public CacheManager cacheManager() {
+    	/*
+    	 * JDK ConcurrentMap-based Cache
+    	 */
         return new ConcurrentMapCacheManager("books");
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(TestClient.class, args);
+        /*
+         * Java based configuration. use JDK ConcurrentMap-based Cache
+         */
+    	//SpringApplication.run(TestClient.class, args);
+    	
+    	/*
+    	 * XML scheme based configuration, use ehcahe
+    	 */
+    	String DEFAULT_CONTEXT_FILE = "/InnotationSpringEhcacheContext.xml";   
+        context =  new ClassPathXmlApplicationContext(DEFAULT_CONTEXT_FILE);  
+        
+        /*
+         * context.getBean(SimpleBookRepository.class) can't get SimpleBookRepository
+         * object, throw NoSuchBeanDefinitionException; because it has change 
+         * by Spring AOP mechanism so there use a proxy object to
+         * invoke SimpleBookRepository though spring Autowired method to inject
+         * a SimpleBookRepository object to SimpleBookRepositoryProxy
+         */
+        //SimpleBookRepository sbrp1 = context.getBean(SimpleBookRepository.class);
+        SimpleBookRepositoryProxy sbrp = context.getBean(SimpleBookRepositoryProxy.class);
+        sbrp.invoke();
     }
 }

@@ -14,8 +14,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 http://www.springframework.org/schema/cache 
 http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-  <context:annotation-config/>
-
+  <context:annotation-config />
+  
   <cache:annotation-driven />
   
   <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cache-manager-ref="ehcache"/>
@@ -25,5 +25,6 @@ http://www.springframework.org/schema/cache/spring-cache.xsd">
   
   <bean id="simpleBookRepository" class="com.test.spring.ehcache.annotation.SimpleBookRepository"/>
   
-  <bean id="proxyInvocation" class="com.test.spring.ehcache.annotation.ProxyInvocation" depends-on="simpleBookRepository"/>                                       
+  <bean id="simpleBookRepositoryProxy" class="com.test.spring.ehcache.annotation.SimpleBookRepositoryProxy"/>
+
 </beans>
