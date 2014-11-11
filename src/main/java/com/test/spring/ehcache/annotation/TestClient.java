@@ -60,7 +60,7 @@ public class TestClient {
         /*
          * Java based configuration. use JDK ConcurrentMap-based Cache
          */
-    	//SpringApplication.run(TestClient.class, args);
+    	SpringApplication.run(TestClient.class, args);
     	
     	/*
     	 * XML scheme based configuration, use ehcahe
